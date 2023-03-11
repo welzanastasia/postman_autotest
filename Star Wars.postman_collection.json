@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "874583b7-5de6-43e8-9bcf-3ba1f7dfaf87",
+		"name": "Star Wars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23819464"
+	},
+	"item": [
+		{
+			"name": "people",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body has name\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\")});\r",
+							"pm.test(\"Name is Obi-Wan Kenobi\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData);\r",
+							"    pm.expect(jsonData.name).to.eql(\"Obi-Wan Kenobi\");\r",
+							"});\r",
+							"pm.test(\"Name is Luke Skywalker\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData);\r",
+							"    pm.expect(jsonData.name).to.eql(\"Luke Skywalker\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.dev/api/people/10",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						"people",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "planet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body has climate\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"climate\");\r",
+							"});\r",
+							"pm.test(\"server is present\", function () {\r",
+							"    pm.response.to.have.header(\"server\");\r",
+							"});\r",
+							"pm.test(\"Status code is not 500\", function () {\r",
+							"    pm.response.to.not.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.dev/api/planets/7/",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						"planets",
+						"7",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "starship",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ожидаю статус ответа 205\", function() {pm.response.to.have.status(205);})\r",
+							"pm.test(\"Response time is more than 1000ms\", function () {pm.expect(pm.response.responseTime).to.be.above(1000);})\r",
+							"pm.test(\"Request has user-agent\", function () {console.log(pm.request.headers.has(\"user-agent\"));})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/starships/5/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"starships",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://swapi.dev"
+		}
+	]
+}
